@@ -292,13 +292,38 @@ def update_address(request):
     return redirect('signin')
 
 def searching(request):
-    
     searching = request.GET['search']
+    if request.method == 'POST':
+        fil = request.POST['filter']
+        if fil == '1':
+            se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=500)
+            se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=500)
+            se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=500)
+            allproduct = se1.union(se2,se3)
+            return render(request,'cat_all.html',{'allp':allproduct})
+        elif fil == '2':
+            se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=1000,pprice__gte=500)
+            se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=1000,pprice__gte=500)
+            se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=1000,pprice__gte=500)
+            allproduct = se1.union(se2,se3)
+            return render(request,'cat_all.html',{'allp':allproduct})
+        elif fil == '3':
+            se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=2000,pprice__gte=1000)
+            se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=2000,pprice__gte=1000)
+            se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=2000,pprice__gte=1000)
+            allproduct = se1.union(se2,se3)
+            return render(request,'cat_all.html',{'allp':allproduct})
+        elif fil == '4':
+            se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=3000,pprice__gte=2000)
+            se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=3000,pprice__gte=2000)
+            se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=3000,pprice__gte=2000)
+            allproduct = se1.union(se2,se3)
+            return render(request,'cat_all.html',{'allp':allproduct})
+            
     se1 = Product.objects.filter(scname__icontains=searching)
     se2 = Product.objects.filter(ptitle__icontains=searching)
     se3 = Product.objects.filter(pabout__icontains=searching)
     allproduct = se1.union(se2,se3)
-    print(allproduct)
     return render(request,'cat_all.html',{'allp':allproduct})
 
 @cache_page(20)
