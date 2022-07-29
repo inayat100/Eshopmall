@@ -301,6 +301,7 @@ def searching(request):
     print(allproduct)
     return render(request,'cat_all.html',{'allp':allproduct})
 
+@cache_page(20)
 def seeall(request):
     obj = Product.objects.all().order_by('?')
     return render(request,'seeall.html',{'allp':obj})
