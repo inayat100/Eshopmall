@@ -19,9 +19,11 @@ def index(request):
     if request.user.is_authenticated:
         cd = Cart.objects.filter(user_name=request.user).count()
         pdu = Product.objects.all().order_by('?')[:8]
-        return render(request, 'index.html',{'products':pdu,'cd':cd})
+        pdu2 = Product.objects.all().order_by('?')[2:10]
+        return render(request, 'index.html',{'products':pdu,'cd':cd,'products2':pdu2})
     pdu = Product.objects.all().order_by('?')[:8]
-    return render(request, 'index.html',{'products':pdu,'cd':0})
+    pdu2 = Product.objects.all().order_by('?')[2:10]
+    return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2})
 
 def sign_up(request):
   if request.method == "POST":
@@ -290,6 +292,7 @@ def update_address(request):
     return redirect('signin')
 
 def searching(request):
+    
     searching = request.GET['search']
     se1 = Product.objects.filter(scname__icontains=searching)
     se2 = Product.objects.filter(ptitle__icontains=searching)
@@ -297,6 +300,10 @@ def searching(request):
     allproduct = se1.union(se2,se3)
     print(allproduct)
     return render(request,'cat_all.html',{'allp':allproduct})
+
+def seeall(request):
+    obj = Product.objects.all().order_by('?')
+    return render(request,'seeall.html',{'allp':obj})
 
 def test(request):
     pass

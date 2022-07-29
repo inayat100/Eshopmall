@@ -5,13 +5,11 @@
 
 
 {% block body %}
-
 <div class="d-flex flex-wrap justify-content-evenly">
-
- {% for p in allp %}
+{% for p in allp %}
 
 <div class="card mt-3"  >
-  <a href="/full/?title={{p.ptitle}}" >
+ <a href="/full/?title={{p.ptitle}}" >
  <img src="{{p.pimage.url}}" class="card-img-top" alt="...">
  <div class="card-body">
    <p class="card-text">{{p.ptitle|truncatechars:50}}</p>
@@ -20,10 +18,6 @@
 </div>
 
 {% endfor %}
-
-
- </div>
-
-
+</div>
 
 {% endblock body %}

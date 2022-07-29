@@ -44,7 +44,7 @@
 
 <!-- this is producat slider -->
 <div class="swiper mySwiper bg-white mt-3">
-    <h2 class="text-center m-3 all">see all</h2>
+    <a href="{% url 'seeall' %}" class="text-center m-3 all">see all</a>
     <div class="swiper-wrapper">
         {%for p in products%}
 
@@ -201,48 +201,22 @@
             <!-- this is fotter producat slider -->
 
             <div class="swiper mySwiper bg-white mt-3">
-                <h2 class="text-center m-3 all">see all</h2>
+                <a href="{% url 'seeall' %}" class="text-center m-3 all">see all</a>
+
                 <div class="swiper-wrapper">
+                    {%for p in products2%}
                     <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{% static 'image/c1.jpg' %}" class="card-img-top" alt="...">
+                        <img src="{{p.pimage.url}}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title 1</h5>
+                            <h5 class="card-title">{{p.pname}}</h5>
+                            <P>{{p.ptitle|truncatechars:30}}</P>
 
                             <!-- <a href="#" class="btn-sm btn-primary">Go somewhere</a> -->
                         </div>
                     </div>
+                    {%endfor%}
+                   
 
-                    <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{% static 'image/c2.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 2</h5>
-                            <!-- <a href="#" class="btn-sm btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{% static 'image/c3.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 3</h5>
-                            <!-- <a href="#" class="btn-sm btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{% static 'image/c4.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 4</h5>
-                            <!-- <a href="#" class="btn-sm btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{% static 'image/c2.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 5</h5>
-                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                        </div>
-                    </div>
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>

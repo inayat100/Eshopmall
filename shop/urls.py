@@ -18,6 +18,7 @@ urlpatterns = [
  path('delet-address/<int:pk>/',views.delet_address,name="delet_address"),
  path('update-address/',views.update_address,name="update_address"),
   path('searching-elements/',views.searching,name="search"),
+  path('see-all-products/',views.seeall,name="seeall"),
   path('all/',views.cat_all,name="all"),
   path('test/',views.test,name="test"),
  
