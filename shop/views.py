@@ -25,7 +25,7 @@ def index(request):
         return render(request, 'index.html',{'products':pdu,'cd':cd,'products2':pdu2, 'products3':pdu3})
     pdu = Product.objects.all().order_by('?')[:8]
     pdu2 = Product.objects.all().order_by('?')[2:10]
-    pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')
+    pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')[:4]
     return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2,'products3':pdu3})
 
 def sign_up(request):
