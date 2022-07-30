@@ -17,6 +17,8 @@ client = razorpay.Client(auth=(config('KEY'),config('SECRET')))
 
 # @cache_page(30)
 def index(request):
+    ob = Product.objects.get(pk=1)
+    print(ob.pimage2)
     if request.user.is_authenticated:
         cd = Cart.objects.filter(user_name=request.user).count()
         pdu = Product.objects.all().order_by('?')[:8]
