@@ -48,8 +48,8 @@
     <div class="swiper-wrapper">
         {%for p in products%}
 
-        <div class="swiper-slide card" style="width: 18rem;">
-            <img src="{{p.pimage.url}}" class="card-img-top" alt="...">
+        <div class="swiper-slide card" style="width: 15rem;">
+            <img src="{{p.pimage.url}}" class="card-img-top h25" alt="...">
             <div class="card-body">
                 <P>{{p.ptitle|truncatechars:30}}</P>
                 <a href="/full/?title={{p.ptitle}}" >show more</a>
@@ -74,90 +74,40 @@
 
     <!-- this is cards here -->
     <div class="container cbg mt-3">
-        <h2 class="text-center mt-3 mx-5 all">see all</h2><br>
+        
+        <a href="{% url 'seeall2' %}" class="text-center m-3 all">see all</a><br>
 
         <div style="margin-top: 40px;">
 
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+
+                {% for p in products3 %}
                 <div class="group relative">
                     <div
                         class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                        <img src="{% static 'image/c1.jpg' %}" alt="Front of men&#039;s Basic Tee in black."
+                        <img src="{{p.pimage.url}}" alt="Front of men&#039;s Basic Tee in black."
                             class="w-full h-full object-center object-cover lg:w-full lg:h-full">
                     </div>
                     <div class="mt-4 flex justify-between">
                         <div>
+                            <a href="/full/?title={{p.ptitle}}">
                             <h3 class="text-sm text-gray-700">
-                                <a href="#">
+                               
                                     <span aria-hidden="true" class="absolute inset-0"></span>
-                                    Basic Tee
-                                </a>
+                                    <p>
+                                        <P>{{p.ptitle|truncatechars:20}}</P>
+                                    </p>
+                                
                             </h3>
-                            <p class="mt-1 text-sm text-gray-500">Black</p>
+                        </a>
+                            <p class="mt-1 text-sm text-gray-500">{{p.pname}}</p>
                         </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
+                        <p class="text-sm font-medium text-gray-900">{{p.pprice}}</p>
                     </div>
                 </div>
 
-                <div class="group relative">
-                    <div
-                        class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                        <img src="{% static 'image/c2.jpg' %}" alt="Front of men&#039;s Basic Tee in black."
-                            class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    Basic Tee
-                                </a>
-                            </h3>
-                            <p class="mt-1 text-sm text-gray-500">Black</p>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-                    </div>
-                </div>
-
-                <div class="group relative">
-                    <div
-                        class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                        <img src="{% static 'image/c3.jpg' %}" alt="Front of men&#039;s Basic Tee in black."
-                            class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    Basic Tee
-                                </a>
-                            </h3>
-                            <p class="mt-1 text-sm text-gray-500">Black</p>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-                    </div>
-                </div>
-
-                <div class="group relative">
-                    <div
-                        class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                        <img src="{% static 'image/c4.jpg' %}" alt="Front of men&#039;s Basic Tee in black."
-                            class="w-full h-full object-center object-cover lg:w-full lg:h-full">
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    Basic Tee
-                                </a>
-                            </h3>
-                            <p class="mt-1 text-sm text-gray-500">Black</p>
-                        </div>
-                        <p class="text-sm font-medium text-gray-900">$35</p>
-                    </div>
-                </div>
+                {% endfor %}
+                
 
                 <!-- More products... -->
 
@@ -205,8 +155,8 @@
 
                 <div class="swiper-wrapper">
                     {%for p in products2%}
-                    <div class="swiper-slide card" style="width: 18rem;">
-                        <img src="{{p.pimage.url}}" class="card-img-top" alt="...">
+                    <div class="swiper-slide card" style="width: 15rem;">
+                        <img src="{{p.pimage.url}}" class="card-img-top h25" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{p.pname}}</h5>
                             <P>{{p.ptitle|truncatechars:30}}</P>

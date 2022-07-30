@@ -9,6 +9,7 @@ from django.http import JsonResponse
 import razorpay
 from django.views.decorators.csrf import csrf_exempt
 from decouple import config
+from django.db.models import Q
 
 
 # client = razorpay.Client(auth=('rzp_test_7mPyjnwM8ZduxW','9AsUh5NHIv5NkkuIXZyvudLH'))
@@ -20,10 +21,12 @@ def index(request):
         cd = Cart.objects.filter(user_name=request.user).count()
         pdu = Product.objects.all().order_by('?')[:8]
         pdu2 = Product.objects.all().order_by('?')[2:10]
-        return render(request, 'index.html',{'products':pdu,'cd':cd,'products2':pdu2})
+        pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')[:4]
+        return render(request, 'index.html',{'products':pdu,'cd':cd,'products2':pdu2, 'products3':pdu3})
     pdu = Product.objects.all().order_by('?')[:8]
     pdu2 = Product.objects.all().order_by('?')[2:10]
-    return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2})
+    pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')
+    return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2,'products3':pdu3})
 
 def sign_up(request):
   if request.method == "POST":
