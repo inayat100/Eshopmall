@@ -15,7 +15,7 @@ def uplo(instance,filename):
     filename,extension = filename.split('.')
     fname = f"{instance.pname}_{instance.ptitle}"
     fname = fname.replace("/","")
-    return 'products/%s.%s' % (fname,extension)    
+    return 'products/%s.%s' % (fname,extension)   
 
 class Category(models.Model):
     cname = models.CharField(max_length=100)
@@ -29,6 +29,10 @@ class Product(models.Model):
     pname = models.CharField(max_length=100)
     ptitle = models.CharField(max_length=200,help_text="plese do not use spacial charater +.#.&",validators=[validate_geeks_mail])
     pimage = models.ImageField(upload_to=uplo)
+    pimage1 = models.ImageField(upload_to=uplo,blank=True,null=True)
+    pimage2 = models.ImageField(upload_to=uplo,blank=True,null=True)
+    pimage3 = models.ImageField(upload_to=uplo,blank=True,null=True)
+    pimage4 = models.ImageField(upload_to=uplo,blank=True,null=True)
     pprice = models.FloatField()
     plessprice = models.FloatField(null=True,blank=True)
     pabout = models.TextField(blank=True,null=True)
