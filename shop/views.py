@@ -300,41 +300,63 @@ def searching(request):
             se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=500)
             se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=500)
             allproduct = se1.union(se2,se3)
-            return render(request,'cat_all.html',{'allp':allproduct})
+            cd = 0
+            if request.user.is_authenticated:
+                cd = Cart.objects.filter(user_name=request.user).count()
+            return render(request,'cat_all.html',{'allp':allproduct,'cd':cd})
         elif fil == '2':
             se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=1000,pprice__gte=500)
             se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=1000,pprice__gte=500)
             se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=1000,pprice__gte=500)
             allproduct = se1.union(se2,se3)
-            return render(request,'cat_all.html',{'allp':allproduct})
+            cd = 0
+            if request.user.is_authenticated:
+                cd = Cart.objects.filter(user_name=request.user).count()
+            return render(request,'cat_all.html',{'allp':allproduct,'cd':cd})
+            
         elif fil == '3':
             se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=2000,pprice__gte=1000)
             se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=2000,pprice__gte=1000)
             se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=2000,pprice__gte=1000)
             allproduct = se1.union(se2,se3)
-            return render(request,'cat_all.html',{'allp':allproduct})
+            cd = 0
+            if request.user.is_authenticated:
+                cd = Cart.objects.filter(user_name=request.user).count()
+            return render(request,'cat_all.html',{'allp':allproduct,'cd':cd})
         elif fil == '4':
             se1 = Product.objects.filter(scname__icontains=searching, pprice__lte=3000,pprice__gte=2000)
             se2 = Product.objects.filter(ptitle__icontains=searching, pprice__lte=3000,pprice__gte=2000)
             se3 = Product.objects.filter(pabout__icontains=searching, pprice__lte=3000,pprice__gte=2000)
             allproduct = se1.union(se2,se3)
-            return render(request,'cat_all.html',{'allp':allproduct})
+            cd = 0
+            if request.user.is_authenticated:
+                cd = Cart.objects.filter(user_name=request.user).count()
+            return render(request,'cat_all.html',{'allp':allproduct,'cd':cd})
             
     se1 = Product.objects.filter(scname__icontains=searching)
     se2 = Product.objects.filter(ptitle__icontains=searching)
     se3 = Product.objects.filter(pabout__icontains=searching)
     allproduct = se1.union(se2,se3)
-    return render(request,'cat_all.html',{'allp':allproduct})
+    cd = 0
+    if request.user.is_authenticated:
+        cd = Cart.objects.filter(user_name=request.user).count()
+    return render(request,'cat_all.html',{'allp':allproduct,'cd':cd})
 
 @cache_page(20)
 def seeall(request):
+    cd = 0
+    if request.user.is_authenticated:
+        cd = Cart.objects.filter(user_name=request.user).count()
     obj = Product.objects.all().order_by('?')
-    return render(request,'seeall.html',{'allp':obj})
+    return render(request,'seeall.html',{'allp':obj,'cd':cd})
 
 @cache_page(20)
 def seeall2(request):
+    cd = 0
+    if request.user.is_authenticated:
+        cd = Cart.objects.filter(user_name=request.user).count()
     obj = Product.objects.all().order_by('?')
-    return render(request,'seeall2.html',{'allp2':obj})
+    return render(request,'seeall2.html',{'allp2':obj,'cd':cd})
 
 def test(request):
     pass
