@@ -331,5 +331,10 @@ def seeall(request):
     obj = Product.objects.all().order_by('?')
     return render(request,'seeall.html',{'allp':obj})
 
+@cache_page(20)
+def seeall2(request):
+    obj = Product.objects.all().order_by('?')
+    return render(request,'seeall2.html',{'allp2':obj})
+
 def test(request):
     pass

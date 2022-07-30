@@ -19,6 +19,7 @@ urlpatterns = [
  path('update-address/',views.update_address,name="update_address"),
   path('searching-elements/',views.searching,name="search"),
   path('see-all-products/',views.seeall,name="seeall"),
+  path('see-all-products-more/',views.seeall2,name="seeall2"),
   path('all/',views.cat_all,name="all"),
   path('test/',views.test,name="test"),
  
