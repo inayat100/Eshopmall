@@ -29,9 +29,15 @@ def index(request):
     pdu2 = Product.objects.all().order_by('?')[2:10]
     pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')[:4]
     return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2,'products3':pdu3})
+
 def all_category(request):
+    cd = 0
+    if request.user.is_authenticated:
+        cd = Cart.objects.filter(user_name=request.user).count()
+        obj = Category.objects.all()
+        return render(request,'category.html',{'cate':obj,'cd':cd})
     obj = Category.objects.all()
-    return render(request,'category.html',{'cate':obj})
+    return render(request,'category.html',{'cate':obj,'cd':cd})
 
 
 def sign_up(request):
