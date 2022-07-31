@@ -365,7 +365,7 @@ def seeall(request):
     obj = Product.objects.all().order_by('?')
     return render(request,'seeall.html',{'allp':obj,'cd':cd})
 
-@cache_page(5)
+@cache_page(10)
 def seeall2(request):
     cd = 0
     cid = request.GET.get('category')
