@@ -192,26 +192,32 @@ def remove_cart(request):
 
 def buy(request,pk):
     if request.user.is_authenticated:
-        cd = Cart.objects.filter(user_name=request.user).count()
-        pd = Product.objects.get(pk=pk)
-        ad = Address.objects.get(user=request.user,primary=True)
-        amount = pd.pprice*100
-        payment = client.order.create({'amount':amount,'currency':'INR','payment_capture':'1'})
-        return render(request, 'order_sum.html',{'payment':payment,'pk':pd,'ad':ad,'cd':cd})
+        if Address.objects.filter(user=request.user).exists():
+            cd = Cart.objects.filter(user_name=request.user).count()
+            pd = Product.objects.get(pk=pk)
+            ad = Address.objects.get(user=request.user,primary=True)
+            amount = pd.pprice*100
+            payment = client.order.create({'amount':amount,'currency':'INR','payment_capture':'1'})
+            return render(request, 'order_sum.html',{'payment':payment,'pk':pd,'ad':ad,'cd':cd})
+        messages.info(request,"please make your pleace address..")
+        return redirect('my_address')
     messages.info(request,"you should login to buy a product")
     return redirect('signin')
 
 def buy_cart(request):
     if request.user.is_authenticated:
-        ad = Address.objects.get(user=request.user,primary=True)
-        crd = Cart.objects.filter(user_name=request.user)
-        total = 0.0
-        for t in crd:
-            total += (t.prd_name.pprice * t.qty)
-        total = round(total,2)
-        amount = round(total,2) * 100
-        payment = client.order.create({'amount':amount,'currency':'INR','payment_capture':'1'})
-        return render(request, 'cart_buy.html',{'payment':payment,'itm':crd,'ad':ad,'total':total})
+        if Address.objects.filter(user=request.user).exists():
+            ad = Address.objects.get(user=request.user,primary=True)
+            crd = Cart.objects.filter(user_name=request.user)
+            total = 0.0
+            for t in crd:
+                total += (t.prd_name.pprice * t.qty)
+            total = round(total,2)
+            amount = round(total,2) * 100
+            payment = client.order.create({'amount':amount,'currency':'INR','payment_capture':'1'})
+            return render(request, 'cart_buy.html',{'payment':payment,'itm':crd,'ad':ad,'total':total})
+        messages.info(request,"please make your pleace address..")
+        return redirect('my_address')
     messages.info(request,"you should login to buy a product")
     return redirect('signin')
       
