@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from itertools import product
 from django.db import models
 from django.contrib.auth.models import User
@@ -19,6 +20,7 @@ def uplo(instance,filename):
 
 class Category(models.Model):
     cname = models.CharField(max_length=100)
+    img = models.ImageField(upload_to='category')
     def __str__(self):
         return self.cname
 

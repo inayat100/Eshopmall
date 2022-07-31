@@ -29,6 +29,10 @@ def index(request):
     pdu2 = Product.objects.all().order_by('?')[2:10]
     pdu3 = Product.objects.filter(ptitle__icontains='bag').order_by('?')[:4]
     return render(request, 'index.html',{'products':pdu,'cd':0,'products2':pdu2,'products3':pdu3})
+def all_category(request):
+    obj = Category.objects.all()
+    return render(request,'category.html',{'cate':obj})
+
 
 def sign_up(request):
   if request.method == "POST":
@@ -72,7 +76,7 @@ def Logout(request):
     return redirect('/')
 
 def full(request):
- sul = request.GET['title']
+ sul = request.GET.get('title')
  pdu = Product.objects.get(ptitle=sul)
  same = Product.objects.filter(cname=pdu.cname).order_by('?')[:8]
  if request.user.is_authenticated:
@@ -355,13 +359,19 @@ def seeall(request):
     obj = Product.objects.all().order_by('?')
     return render(request,'seeall.html',{'allp':obj,'cd':cd})
 
-@cache_page(20)
+@cache_page(5)
 def seeall2(request):
     cd = 0
+    cid = request.GET.get('category')
+    if cid:
+        cat = Product.objects.filter(cname=cid)
+        return render(request,'seeall2.html',{'allp2':cat,'cd':cd})
     if request.user.is_authenticated:
         cd = Cart.objects.filter(user_name=request.user).count()
     obj = Product.objects.all().order_by('?')
     return render(request,'seeall2.html',{'allp2':obj,'cd':cd})
+
+
 
 def test(request):
     pass

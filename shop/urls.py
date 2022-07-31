@@ -21,6 +21,7 @@ urlpatterns = [
   path('see-all-products/',views.seeall,name="seeall"),
   path('see-all-products-more/',views.seeall2,name="seeall2"),
   path('all/',views.cat_all,name="all"),
+  path('all-category/',views.all_category,name="all_category"),
   path('test/',views.test,name="test"),
  
 ]
